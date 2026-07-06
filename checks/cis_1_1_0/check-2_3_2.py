@@ -46,7 +46,7 @@ class Check_CIS_2_3_2(Checker):
         # Check the SNMPv3 users configured
         config_system_snmp_user = self.get_config("system snmp user")
 
-        if len(config_system_snmp_user['edits']) > 0:
+        if config_system_snmp_user is not None and 'edits' in config_system_snmp_user and len(config_system_snmp_user['edits']) > 0:
             self.add_message('There are SNMP users defined:')
             for edit in config_system_snmp_user['edits']:
                 self.add_message(f'user: {edit["edit"]}')
